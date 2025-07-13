@@ -1,0 +1,26 @@
+package com.movie.portal.user_service.auth.Controller;
+
+import com.movie.portal.user_service.auth.Dto.UserResponse;
+import com.movie.portal.user_service.auth.Services.UserService;
+import com.movie.portal.user_service.auth.Dto.UserDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/users")
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserResponse> registerUser(@RequestBody UserDto request) {
+        return ResponseEntity.ok(userService.registerUser(request));
+    }
+}
