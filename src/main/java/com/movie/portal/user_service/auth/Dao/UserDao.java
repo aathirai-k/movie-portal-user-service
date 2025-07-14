@@ -4,9 +4,24 @@ import com.movie.portal.user_service.auth.Model.User;
 
 import java.util.Optional;
 
-
+/**
+ * Data Access Object interface for User entity.
+ * Defines methods to save and retrieve user data.
+ */
 public interface UserDao {
+    /**
+     * Saves a User entity in the database.
+     *
+     * @param user the User object to be saved
+     * @return the saved User with generated ID
+     */
     User saveUser(User user);
 
+    /**
+     * Finds a User by their email address.
+     *
+     * @param email the email address to search for
+     * @return an Optional containing the User if found, or empty if not found
+     */
     Optional<User> findUserByEmail(String email);
 }

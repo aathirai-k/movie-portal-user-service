@@ -10,6 +10,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of the UserService interface.
+ * Handles user registration and business logic.
+ */
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;

@@ -9,6 +9,10 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.time.LocalDateTime;
 
+/**
+ * Global exception handler for REST controllers.
+ * Catches specific exceptions and returns meaningful HTTP responses with error details.
+ */
 @RestControllerAdvice
 public class ApiExceptionHandler {
 

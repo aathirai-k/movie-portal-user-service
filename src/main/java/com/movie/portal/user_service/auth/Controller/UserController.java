@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This controller handles user registration requests.
+ */
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
@@ -19,6 +22,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    /**
+     * Registers a new user.
+     *
+     * @param request the registration data
+     * @return the registered user details
+     */
     @PostMapping("/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody UserDto request) {
         return ResponseEntity.ok(userService.registerUser(request));
