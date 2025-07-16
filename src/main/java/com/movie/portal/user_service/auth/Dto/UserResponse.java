@@ -1,5 +1,9 @@
 package com.movie.portal.user_service.auth.Dto;
 
+/**
+ * Data Transfer Object for User information.
+ * Used to transfer user data from server layers.
+ */
 public class UserResponse {
     private Long id;
     private String userName;
@@ -13,35 +17,57 @@ public class UserResponse {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public UserResponse(Builder builder) {
+        this.userName = builder.userName;
+        this.email = builder.email;
+        this.userRole = builder.userRole;
+        this.id = builder.id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getUserName() {
+        return userName;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
+    public static class Builder {
+        private Long id;
+        private String userName;
+        private String email;
+        private String userRole;
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder userName(String userName) {
+            this.userName = userName;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder userRole(String userRole) {
+            this.userRole = userRole;
+            return this;
+        }
+
+        public UserResponse build() {
+            return new UserResponse(this);
+        }
     }
 }
