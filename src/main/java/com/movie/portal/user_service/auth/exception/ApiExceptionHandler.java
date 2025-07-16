@@ -69,4 +69,29 @@ public class ApiExceptionHandler {
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ApiError("An unexpected error occurred."));
     }
+
+    @ExceptionHandler(InvalidLoginException.class)
+    public ResponseEntity<ApiError> handleLoginValidation(InvalidLoginException ex) {
+        String errorMessage = ex.getMessage();
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(new ApiError(errorMessage));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ApiError> handleLoginValidation(UserNotFoundException ex) {
+        String errorMessage = ex.getMessage();
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ApiError(errorMessage));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiError> handleLoginValidation(IllegalArgumentException ex) {
+        String errorMessage = ex.getMessage();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ApiError(errorMessage));
+    }
+
 }
