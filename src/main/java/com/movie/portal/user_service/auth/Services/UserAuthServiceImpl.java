@@ -1,6 +1,6 @@
 package com.movie.portal.user_service.auth.Services;
 
-import com.movie.portal.user_service.auth.Dao.UserDao;
+import com.movie.portal.user_service.auth.Dao.UserDaoRepository;
 import com.movie.portal.user_service.auth.Dto.LoginRequestDto;
 import com.movie.portal.user_service.auth.Dto.LoginResponse;
 import com.movie.portal.user_service.auth.Dto.UserResponse;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserAuthServiceImpl implements UserAuthService {
     @Autowired
-    private UserDao userDao;
+    private UserDaoRepository userDaoRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -29,7 +29,7 @@ public class UserAuthServiceImpl implements UserAuthService {
     @Override
     public LoginResponse loginUser(LoginRequestDto request) {
         validateUserInput(request);
-        User exitingUser = userDao.findUserByEmail(request.getEmail()).orElseThrow(() -> new UserNotFoundException(request.getEmail()));
+        User exitingUser = userDaoRepository.findUserByEmail(request.getEmail()).orElseThrow(() -> new UserNotFoundException(request.getEmail()));
 
         validateUserPassword(request, exitingUser);
         String token = jwtService.generateToken(exitingUser);

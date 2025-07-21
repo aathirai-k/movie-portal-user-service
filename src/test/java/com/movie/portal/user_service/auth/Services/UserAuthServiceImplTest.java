@@ -1,6 +1,6 @@
 package com.movie.portal.user_service.auth.Services;
 
-import com.movie.portal.user_service.auth.Dao.UserDao;
+import com.movie.portal.user_service.auth.Dao.UserDaoRepository;
 import com.movie.portal.user_service.auth.Dto.LoginRequestDto;
 import com.movie.portal.user_service.auth.Model.User;
 import com.movie.portal.user_service.auth.exception.InvalidLoginException;
@@ -25,7 +25,7 @@ import static org.mockito.BDDMockito.given;
 class UserAuthServiceImplTest {
 
     @Mock
-    private UserDao userDao;
+    private UserDaoRepository userDaoRepository;
     @Mock
     private PasswordEncoder passwordEncoder;
     @Mock
@@ -54,7 +54,7 @@ class UserAuthServiceImplTest {
         void returnsLoginResponse_whenCredentialsAreValid() {
             // given
             LoginRequestDto req = new LoginRequestDto("test7@gmail.com", "plainPwd");
-            given(userDao.findUserByEmail("test7@gmail.com")).willReturn(Optional.of(stubUser));
+            given(userDaoRepository.findUserByEmail("test7@gmail.com")).willReturn(Optional.of(stubUser));
             given(passwordEncoder.matches("plainPwd", stubUser.getPassword())).willReturn(true);
             given(jwtService.generateToken(stubUser)).willReturn("dummy-token");
 
@@ -77,7 +77,7 @@ class UserAuthServiceImplTest {
         void throws_UserNotFoundException_whenEmailNotInDatabase() {
             // given
             LoginRequestDto req = new LoginRequestDto("absent@mail.com", "pwd");
-            given(userDao.findUserByEmail(anyString())).willReturn(Optional.empty());
+            given(userDaoRepository.findUserByEmail(anyString())).willReturn(Optional.empty());
 
             // when / then
             assertThatThrownBy(() -> authService.loginUser(req))
@@ -88,7 +88,7 @@ class UserAuthServiceImplTest {
         void throws_InvalidLoginException_whenPasswordMismatch() {
             // given
             LoginRequestDto req = new LoginRequestDto("test7@gmail.com", "wrongPwd");
-            given(userDao.findUserByEmail("test7@gmail.com")).willReturn(Optional.of(stubUser));
+            given(userDaoRepository.findUserByEmail("test7@gmail.com")).willReturn(Optional.of(stubUser));
             given(passwordEncoder.matches("wrongPwd", stubUser.getPassword())).willReturn(false);
 
             // when / then

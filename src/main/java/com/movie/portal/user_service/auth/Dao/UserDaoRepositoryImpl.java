@@ -17,7 +17,7 @@ import java.util.Optional;
  * Handles saving users and retrieving users by email.
  */
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoRepositoryImpl implements UserDaoRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -68,5 +68,36 @@ public class UserDaoImpl implements UserDao {
                 .query(sql, new BeanPropertyRowMapper<>(User.class), email)
                 .stream()
                 .findFirst();
+    }
+
+    /**
+     * Finds a User in the database by user id.
+     *
+     * @param id the id to search for
+     * @return an Optional containing the User if found, or empty if not found
+     */
+    @Override
+    public Optional<User> findUserById(Long id) {
+        String sql = "SELECT id, email, password, username, role FROM users WHERE id = ?";
+        return jdbcTemplate
+                .query(sql, new BeanPropertyRowMapper<>(User.class), id)
+                .stream()
+                .findFirst();
+    }
+
+    /**
+     * Update a User in the database.
+     *
+     * @param user user information
+     * @return integer value
+     */
+    public int updateUser(User user) {
+        String sql = "UPDATE users SET email = ?, username = ?, password = ?, role = ? WHERE id = ?";
+        return jdbcTemplate.update(sql,
+                user.getEmail(),
+                user.getUsername(),
+                user.getPassword(),
+                user.getRole(),
+                user.getId());
     }
 }

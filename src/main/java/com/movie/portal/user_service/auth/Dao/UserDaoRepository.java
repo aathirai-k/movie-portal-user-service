@@ -8,7 +8,7 @@ import java.util.Optional;
  * Data Access Object interface for User entity.
  * Defines methods to save and retrieve user data.
  */
-public interface UserDao {
+public interface UserDaoRepository {
     /**
      * Saves a User entity in the database.
      *
@@ -24,4 +24,20 @@ public interface UserDao {
      * @return an Optional containing the User if found, or empty if not found
      */
     Optional<User> findUserByEmail(String email);
+
+    /**
+     * Finds a User by user id.
+     *
+     * @param id the user id to search for
+     * @return an Optional containing the User if found, or empty if not found
+     */
+    Optional<User> findUserById(Long id);
+
+    /**
+     * Update User.
+     *
+     * @param user update user information
+     * @return integer value for updated user
+     */
+    int updateUser(User user);
 }
