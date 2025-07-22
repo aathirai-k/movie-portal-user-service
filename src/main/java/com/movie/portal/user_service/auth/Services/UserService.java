@@ -14,4 +14,13 @@ public interface UserService {
      * @return a UserResponse DTO representing the registered user
      */
     public UserResponse registerUser(UserDto request);
+
+    /**
+     * Update user information.
+     *
+     * @param id the user id
+     * @param request for user information
+     * @param isAdmin for user is admin
+     */
+    public void updateUser(Long id, UserDto request, boolean isAdmin);
 }
