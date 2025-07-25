@@ -1,9 +1,9 @@
 package com.movie.portal.user_service.auth.Services;
 
-import com.movie.portal.user_service.auth.Dao.UserDaoRepository;
+import com.movie.portal.user_service.auth.Repository.UserDaoRepository;
 import com.movie.portal.user_service.auth.Dto.UserDto;
 import com.movie.portal.user_service.auth.Dto.UserResponse;
-import com.movie.portal.user_service.auth.Model.User;
+import com.movie.portal.user_service.auth.Entity.User;
 import com.movie.portal.user_service.auth.exception.DatabaseException;
 import com.movie.portal.user_service.auth.exception.DuplicateEmailException;
 import com.movie.portal.user_service.uitility.AppConstants;
@@ -55,7 +55,11 @@ public class UserServiceImpl implements UserService {
 
         if (isAdmin) {
             if (StringUtils.hasText(request.getUserRole())) {
-                user.setRole(request.getUserRole());
+                String role = request.getUserRole().toUpperCase();
+                if (!role.startsWith(AppConstants.ROLE)) {
+                    role = AppConstants.ROLE + role;
+                }
+                user.setRole(role);
             }
             if (StringUtils.hasText(request.getUserName())) {
                 user.setUsername(request.getUserName());

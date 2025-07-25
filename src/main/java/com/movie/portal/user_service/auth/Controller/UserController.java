@@ -40,7 +40,7 @@ public class UserController {
      * @param authentication the user authentication
      * @return success message
      */
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<String> updateUser(
             @PathVariable Long id,

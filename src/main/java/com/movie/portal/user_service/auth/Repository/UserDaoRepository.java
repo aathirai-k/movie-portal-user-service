@@ -1,6 +1,6 @@
-package com.movie.portal.user_service.auth.Dao;
+package com.movie.portal.user_service.auth.Repository;
 
-import com.movie.portal.user_service.auth.Model.User;
+import com.movie.portal.user_service.auth.Entity.User;
 
 import java.util.Optional;
 
