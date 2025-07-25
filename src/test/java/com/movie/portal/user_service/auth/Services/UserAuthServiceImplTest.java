@@ -1,8 +1,8 @@
 package com.movie.portal.user_service.auth.Services;
 
-import com.movie.portal.user_service.auth.Dao.UserDaoRepository;
+import com.movie.portal.user_service.auth.Repository.UserDaoRepository;
 import com.movie.portal.user_service.auth.Dto.LoginRequestDto;
-import com.movie.portal.user_service.auth.Model.User;
+import com.movie.portal.user_service.auth.Entity.User;
 import com.movie.portal.user_service.auth.exception.InvalidLoginException;
 import com.movie.portal.user_service.auth.exception.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;

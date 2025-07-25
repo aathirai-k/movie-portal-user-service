@@ -1,4 +1,4 @@
-package com.movie.portal.user_service.auth.Model;
+package com.movie.portal.user_service.auth.Entity;
 
 import jakarta.persistence.*;
 
