@@ -41,7 +41,12 @@ public class UserServiceImpl implements UserService {
 
         try {
             User saved = userDaoRepository.saveUser(user);
-            return new UserResponse(saved.getId(), saved.getUsername(), saved.getEmail(), saved.getRole());
+            return new UserResponse.Builder()
+                    .id(saved.getId())
+                    .userName(saved.getUsername())
+                    .email(saved.getEmail())
+                    .userRole(saved.getRole())
+                    .build();
 
         } catch (DataAccessException dbEx) {
             throw new DatabaseException("Could not register user at the moment. Please try again.", dbEx);
