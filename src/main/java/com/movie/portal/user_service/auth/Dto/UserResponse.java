@@ -10,13 +10,6 @@ public class UserResponse {
     private String email;
     private String userRole;
 
-    public UserResponse(Long id, String userName, String email, String userRole) {
-        this.userName = userName;
-        this.email = email;
-        this.userRole = userRole;
-        this.id = id;
-    }
-
     public UserResponse(Builder builder) {
         this.userName = builder.userName;
         this.email = builder.email;

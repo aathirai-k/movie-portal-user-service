@@ -4,20 +4,14 @@ package com.movie.portal.user_service.auth.Dto;
  * Data Transfer Object for User information.
  * Used to transfer user data between client and server layers.
  */
-public class UserDto {
-    private Long id;
+public class UserDto     {
+
     private String userName;
     private String email;
     private String password;
     private String userRole;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;
